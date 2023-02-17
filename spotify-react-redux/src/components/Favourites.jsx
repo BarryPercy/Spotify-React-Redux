@@ -1,18 +1,17 @@
 import { useSelector } from 'react-redux'
 import { Container, Col, Row, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import Job from './Job'
 
 const Favourites = () =>{
-    let songs = useSelector((state)=>state.favourites.favourites.songs)
-    console.log(favourites)
+    let songs = useSelector((state)=>state.favouriteSongs.favourites.songs)
     return(
         <Container>
             <Row>
                 <Col>
-                    {songs.map((jobData) => (
-                        <Job key={jobData._id} data={jobData} favourite={true}/>   
-                    ))}
+                    {songs.map((song) => {
+                         return(
+                            <p key={song.id}>{song.title}</p>
+                        )
+                    })}
                 </Col>
             </Row>
         </Container>

@@ -7,6 +7,7 @@ const Playbar = () => {
     const [currentSong,setCurrentSong]=useState();
     const [currentSongIndex, setCurrentSongIndex] = useState(0)
     const [album, setAlbum] = useState([])
+    const[fetched,setFetched] = useState(false)
     let songs = useSelector((state) => state.favouriteSongs.favourites.songs)
     const dispatch = useDispatch()
     const playUrl="https://striveschool-api.herokuapp.com/api/deezer/search?q=pink+floyd"
@@ -17,6 +18,7 @@ const Playbar = () => {
                 res = await res.json();
                 setCurrentSong(res.data[0])
                 setAlbum(res.data)
+                setFetched(true)
             }
             else{
                 console.log("we elsed!")
@@ -26,7 +28,9 @@ const Playbar = () => {
         }
     }
     const toggleFavourite=()=>{
-        console.log("togglin")
+        console.log(songs.some((song)=>{song.id==currentSong.id}))
+        console.log(songs)
+        console.log(currentSong.id)
         if(songs.includes(currentSong)){
           dispatch(removeFromFavourites(currentSong.id))
         }else{
@@ -56,7 +60,7 @@ const Playbar = () => {
                             <p className="current-song-text text-white">{currentSong?.title}</p>
                             <p className="current-artist-text play-list-text" >{currentSong?.artist.name}</p>
                         </div>
-                        {songs.includes(currentSong)?<AiFillHeart className="heart-down" onClick={toggleFavourite}/>:<AiOutlineHeart className="heart-down" onClick={toggleFavourite}/>}
+                        {fetched&&songs.some((song)=>{song.id===currentSong.id})?<AiFillHeart className="heart-down" onClick={toggleFavourite}/>:<AiOutlineHeart className="heart-down" onClick={toggleFavourite}/>}
                     </Col>
                     <Col xs={5} className="middle-of-play-bar">
                         <div className="song-icons d-flex justify-content-center">

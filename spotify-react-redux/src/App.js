@@ -4,6 +4,7 @@ import Home from './components/Home'
 import Playbar from './components/Playbar'
 import Album from './components/Album'
 import Artist from './components/Artist'
+import Favourites from './components/Favourites'
 import './App.css';
 
 function App() {
@@ -23,6 +24,10 @@ function App() {
               <Route
                   path="/artist/:id"
                   element={<Artist/>}
+                />
+              <Route
+                  path="/favourites/"
+                  element={<Favourites/>}
                 />
             </Routes>
           </div>

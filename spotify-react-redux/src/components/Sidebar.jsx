@@ -11,7 +11,7 @@ const Sidebar = () => {
             <p><Image src="library.png" className="left-icons"/>Your Library</p>
             <br/>
             <p><Image src="plus-square.svg" className="left-icons"/>Create Playlist</p>
-            <p><Image src="chat-heart-fill.svg" className="left-icons"/>Liked Songs</p>
+            <Link to="/favourites" className="nolinkstyling"><p><Image src="chat-heart-fill.svg" className="left-icons"/>Liked Songs</p></Link>
             <hr className="aside-hr"/>
             <div id="playlist-wrapper">
                 <div id="top-playlists"></div>
