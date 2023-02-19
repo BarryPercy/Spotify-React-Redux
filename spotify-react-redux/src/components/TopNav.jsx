@@ -2,15 +2,18 @@ import {Container, Row, Col, Image, Nav, Button} from 'react-bootstrap'
 import { BsChevronLeft,BsChevronRight } from 'react-icons/bs'
 import { InputGroup,Form } from 'react-bootstrap';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { search } from '../redux/actions';
 const TopNav = () => {
   const [query, setQuery]= useState("rock")
+  const dispatch = useDispatch()
   const handleChange = (e) => {
     setQuery(e.target.value)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    dispatch(search(baseEndpoint,query))
+    dispatch(search(query))
   }
   return(
     <>
@@ -29,13 +32,15 @@ const TopNav = () => {
                   </div>
                 </Col>
                 
-                <Col xs={3}>
-                  <InputGroup className="mb-3">
-                    <Form.Control
-                      placeholder="Search Music"
-                      onChange={handleChange}
-                    />
-                  </InputGroup>
+                <Col xs={6}>
+                  
+                    <Form onSubmit={handleSubmit} className="mb-3">
+                      <Form.Control
+                        placeholder="Search Music"
+                        onChange={handleChange}
+                      />
+                    </Form>
+                  
                 </Col>
             </Nav>
           </Col>

@@ -1,29 +1,22 @@
 import {Container, Row, Col, Image} from 'react-bootstrap'
 import TopNav from './TopNav'
 import { useEffect,useState } from 'react'
-import GoodMorning from './GoodMorning'
+import SearchSongs from './SearchSongs'
+import {search} from '../redux/actions'
+import { useSelector, useDispatch } from 'react-redux'
 const Home = () => {
-    const [albumArray,setAlbumArray] = useState([])
-    const fetchSongs=(search)=>{
-
-        fetch('https://striveschool-api.herokuapp.com/api/deezer/search?q='+search)
-        .then(response => response.json())
-        .then((jsonResponse) => {
-            const {data}=jsonResponse
-            setAlbumArray(data)
-        }
-        )
-        .catch(err => console.error(err));
-    }
+    const searchSongs = useSelector((state) => state.songs.songList)
+    const songsSearched = useSelector((state)=>state.songs.songsSearched)
+    const dispatch = useDispatch()
     useEffect(() => {
-        fetchSongs("rock");
+        dispatch(search("rock"));
     }, [])
     return(
         <div className="Home">
             <TopNav className="top-nav"/>
-            <Container>
+            <Container fluid>
                 <Row>
-                    <GoodMorning array={albumArray}/>
+                    {songsSearched&&<SearchSongs array={searchSongs}/>}
                 </Row>
             </Container>
             

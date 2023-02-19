@@ -730,3 +730,7 @@ input[type=range]::-webkit-slider-thumb {
 .middle-of-play-bar{
   padding-top:20px;
 }
+
+.selectionDisabled{
+  user-select: none;
+}

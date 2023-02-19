@@ -7,7 +7,14 @@ const initialState = {
   const favouritesReducer = (state = initialState, action) => {
     switch (action.type) {
       case 'ADD_TO_FAVOURITES':
-        if(state.favourites.songs.some((song)=>song.id===action.payload.id)){
+        let existsAlready = false;
+        state.favourites.songs.forEach(song => {
+          if(song.id===action.payload.id){
+            existsAlready = true;
+            console.log("exists already!")
+          }
+        });
+        if(existsAlready){
             return {
                 favourites:{
                     ...state.favourites,
@@ -24,7 +31,6 @@ const initialState = {
         }
   
       case 'REMOVE_FROM_FAVOURITES':
-        console.log("removin!",state,action.payload)
         return {
           favourites: {
             songs: state.favourites.songs.filter((song) => song.id !== action.payload),

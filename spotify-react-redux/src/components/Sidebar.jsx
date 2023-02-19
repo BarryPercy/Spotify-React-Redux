@@ -1,5 +1,6 @@
 import {Container, Row, Col, Image} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import Favourites from './Favourites'
 const Sidebar = () => {
 
   return(
@@ -14,7 +15,7 @@ const Sidebar = () => {
             <Link to="/favourites" className="nolinkstyling"><p><Image src="chat-heart-fill.svg" className="left-icons"/>Liked Songs</p></Link>
             <hr className="aside-hr"/>
             <div id="playlist-wrapper">
-                <div id="top-playlists"></div>
+                <Favourites/>
             </div>
                 
         </div>
